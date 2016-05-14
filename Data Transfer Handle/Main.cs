@@ -8,6 +8,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
+using Excel=Microsoft.Office.Interop.Excel;
+using System.IO;
+
 
 namespace Data_Transfer_Handle
 {
@@ -144,6 +147,48 @@ namespace Data_Transfer_Handle
         private void btnRefresh_Click(object sender, EventArgs e)
         {
             Refresh();
+        }
+
+        private void btnArchive_Click(object sender, EventArgs e)
+        {
+            //Initialize Access to the database
+            DatabaseAccess tableInfo = new DatabaseAccess();
+            //Get the tables needed to send to Excel
+            MySqlDataReader Reader= tableInfo.ExportToExcel();
+
+            //This Exports the tables to Excel.
+            int row=1;
+            string curFile = @"c:\cops\test.xlsx";
+            if (!File.Exists(curFile))
+            {
+                Object misValue = System.Reflection.Missing.Value;
+                Excel.Application app = new Excel.Application();
+                Excel.Workbook workbook = (Excel.Workbook)app.Workbooks.Add(misValue);
+                Excel.Worksheet worksheet=workbook.Sheets[1];
+                while (Reader.Read())
+                {
+                    for (int col = 0; col < Reader.FieldCount; col++)
+                    {
+                        worksheet.Cells[row + 1, col + 1] = Reader.GetValue(col);
+                    }
+                    row++;
+                }
+
+                workbook.SaveAs(@"C:\cops\test.xlsx");
+               
+                
+
+            }else{
+
+               
+            }
+            
+            
+
+          
+
+
+
         }
      
     }

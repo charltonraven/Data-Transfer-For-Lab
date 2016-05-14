@@ -34,6 +34,7 @@
             this.tbComplete = new System.Windows.Forms.TabPage();
             this.dgCompleted = new System.Windows.Forms.DataGridView();
             this.btnRefresh = new System.Windows.Forms.Button();
+            this.btnArchive = new System.Windows.Forms.Button();
             this.tabControl.SuspendLayout();
             this.tbNotComplete.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgNotCompleted)).BeginInit();
@@ -110,11 +111,22 @@
             this.btnRefresh.UseVisualStyleBackColor = true;
             this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
             // 
+            // btnArchive
+            // 
+            this.btnArchive.Location = new System.Drawing.Point(768, 259);
+            this.btnArchive.Name = "btnArchive";
+            this.btnArchive.Size = new System.Drawing.Size(75, 23);
+            this.btnArchive.TabIndex = 2;
+            this.btnArchive.Text = "Archive";
+            this.btnArchive.UseVisualStyleBackColor = true;
+            this.btnArchive.Click += new System.EventHandler(this.btnArchive_Click);
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(854, 283);
+            this.Controls.Add(this.btnArchive);
             this.Controls.Add(this.btnRefresh);
             this.Controls.Add(this.tabControl);
             this.Name = "Main";
@@ -137,6 +149,7 @@
         private System.Windows.Forms.DataGridView dgNotCompleted;
         private System.Windows.Forms.DataGridView dgCompleted;
         private System.Windows.Forms.Button btnRefresh;
+        private System.Windows.Forms.Button btnArchive;
     }
 }
 

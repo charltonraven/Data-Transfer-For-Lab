@@ -34,6 +34,19 @@ namespace Data_Transfer_Handle
             conn.Close();
 
         }
+        public MySqlDataReader ExportToExcel()
+        {
+            conn.Open();
+            String getData = "Select * from transferinformation";
+            MySqlCommand dAdapter = new MySqlCommand(getData, conn);
+            MySqlDataReader Reader = dAdapter.ExecuteReader();
+
+            return Reader;
+
+            
+
+
+        }
 
     }
 }

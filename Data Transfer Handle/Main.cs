@@ -158,13 +158,30 @@ namespace Data_Transfer_Handle
 
             //This Exports the tables to Excel.
             int row=1;
-            string curFile = @"c:\cops\test.xlsx";
+            string curFile = @"c:\cops\Archive.xlsx";
             if (!File.Exists(curFile))
             {
                 Object misValue = System.Reflection.Missing.Value;
                 Excel.Application app = new Excel.Application();
                 Excel.Workbook workbook = (Excel.Workbook)app.Workbooks.Add(misValue);
                 Excel.Worksheet worksheet=workbook.Sheets[1];
+                //Bolds Entire row
+                Excel.Range formatRange;
+                formatRange = worksheet.get_Range("a1");
+                formatRange.EntireRow.Font.Bold = true;
+
+                formatRange = worksheet.get_Range("A1", "M200");
+                
+                //Add Columns
+                worksheet.Cells[1, 1] = "EmployeeID";
+                worksheet.Cells[1, 2] = "First Name";
+                worksheet.Cells[1, 3] = "Last Name";
+                worksheet.Cells[1, 4] = "Phone Number";
+                worksheet.Cells[1, 5] = "Old Computer";
+                worksheet.Cells[1, 6] = "New Computer";
+                worksheet.Cells[1, 7] = "Date Recieved";
+                worksheet.Cells[1, 8] = "Date Finished";
+                worksheet.Cells[1, 9] = "COPS ID";
                 while (Reader.Read())
                 {
                     for (int col = 0; col < Reader.FieldCount; col++)
@@ -173,13 +190,83 @@ namespace Data_Transfer_Handle
                     }
                     row++;
                 }
+                DateTime date = DateTime.Now;
+                String DateSheetName=date.ToString("y", System.Globalization.CultureInfo.CreateSpecificCulture("en-US"));
+                //Helps Auto Format Cells
+                formatRange.Columns.AutoFit();
 
-                workbook.SaveAs(@"C:\cops\test.xlsx");
+                worksheet.Name = DateSheetName;
+                workbook.SaveAs(@"C:\cops\Archive.xlsx");
+                workbook.Close();
+                
                
                 
 
             }else{
+                //Gets Exisiting Workbook for Modification
+                Excel.Application app = new Excel.Application();
+                Excel.Workbook workbook = app.Workbooks.Open(@"c:\cops\Archive.xlsx");
+                Excel.Worksheet worksheet = workbook.Sheets.Add();
 
+
+                //Changes Default worksheet name according to Month name and year. i.e: May, 2016
+                DateTime date = DateTime.Now;
+
+
+                //Try-Catch Block to See if Archiving has been done already
+                try
+                {
+                    worksheet.Name = date.ToString("y", System.Globalization.CultureInfo.CreateSpecificCulture("en-US"));
+                    //Bolds Entire row
+                    Excel.Range formatRange;
+                    formatRange = worksheet.get_Range("a1");
+                    formatRange.EntireRow.Font.Bold = true;
+
+
+                    //Change Format Cell
+                    formatRange = worksheet.get_Range("A1", "M200");
+
+                    //Add Columns
+                    worksheet.Cells[1, 1] = "EmployeeID";
+                    worksheet.Cells[1, 2] = "First Name";
+                    worksheet.Cells[1, 3] = "Last Name";
+                    worksheet.Cells[1, 4] = "Phone Number";
+                    worksheet.Cells[1, 5] = "Old Computer";
+                    worksheet.Cells[1, 6] = "New Computer";
+                    worksheet.Cells[1, 7] = "Date Recieved";
+                    worksheet.Cells[1, 8] = "Date Finished";
+                    worksheet.Cells[1, 9] = "COPS ID";
+                    while (Reader.Read())
+                    {
+                        for (int col = 0; col < Reader.FieldCount; col++)
+                        {
+                            worksheet.Cells[row + 1, col + 1] = Reader.GetValue(col);
+                        }
+                        row++;
+                    }
+
+                    //Helps Auto Format Cells
+                    formatRange.Columns.AutoFit();
+
+
+
+                    //Saves workwork
+                    workbook.Save();
+                    workbook.Close();
+                
+
+                }
+                catch (Exception E)
+                {
+                    MessageBox.Show("Archive Have already been done this Month");
+                }
+
+
+
+
+
+
+                
                
             }
             

@@ -36,8 +36,12 @@ namespace Data_Transfer_Handle
         }
         public MySqlDataReader ExportToExcel()
         {
+            DateTime date = DateTime.Now;
+            int Month = date.Month;
+            int year = date.Year;
+            int last = DateTime.DaysInMonth(year, Month);
             conn.Open();
-            String getData = "Select * from transferinformation";
+            String getData = "Select * from transferinformation where RecievedDate BETWEEN \""+year+"-"+Month+"-1\" And \""+ year+"-"+Month+"-"+last+"\"";
             MySqlCommand dAdapter = new MySqlCommand(getData, conn);
             MySqlDataReader Reader = dAdapter.ExecuteReader();
 

@@ -43,14 +43,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Data Transfer Handle.exe" size="56752">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Data Transfer Handle.exe" size="60336">
       <assemblyIdentity name="Data Transfer Handle" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>6ZD+josWswEUWM+cTMwQHdHKNs3Sn5VqqJ+2rMemrBA=</dsig:DigestValue>
+        <dsig:DigestValue>tmQHl6ub+iqC03I5dXEwYcerQndesnUO9SfzhpXX7m0=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

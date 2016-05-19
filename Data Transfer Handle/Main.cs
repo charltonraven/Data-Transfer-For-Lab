@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
-using Excel=Microsoft.Office.Interop.Excel;
+using Excel = Microsoft.Office.Interop.Excel;
 using System.IO;
 
 
@@ -19,8 +19,11 @@ namespace Data_Transfer_Handle
         public static String myConnString = "SERVER=oldbrainbox;Port=3306;Database=dataTransfers;uid=root;Password=Raven47946$;";
         public MySqlConnection conn = new MySqlConnection(myConnString);
         MySqlDataAdapter mySqlDataAdapter;
-        DataSet DS;
-        
+        DataSet DSComplete;
+        DataSet DSnotComplete;
+            
+       
+
 
 
         public Main()
@@ -28,11 +31,12 @@ namespace Data_Transfer_Handle
             InitializeComponent();
 
         }
+      
 
         private void Form1_Load(object sender, EventArgs e)
         {
             RefreshTables();
-            
+
 
 
 
@@ -83,13 +87,13 @@ namespace Data_Transfer_Handle
 
         private void dgNotCompleted_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            
+
             var senderGrid = (DataGridView)sender;
 
             if (senderGrid.Columns[e.ColumnIndex] is DataGridViewButtonColumn &&
                 e.RowIndex >= 0)
             {
-              //  MessageBox.Show("Col: " + e.ColumnIndex + " Row: " + e.RowIndex);
+                //  MessageBox.Show("Col: " + e.ColumnIndex + " Row: " + e.RowIndex);
                 String EmployeeID = dgNotCompleted.Rows[e.RowIndex].Cells["EmployeeID"].Value.ToString();
                 String Date = dgNotCompleted.Rows[e.RowIndex].Cells["RecievedDate"].Value.ToString();
 
@@ -110,8 +114,10 @@ namespace Data_Transfer_Handle
         {
 
         }
-        public void RefreshTables(){
-            //Initilize the Dataset and DataAdapter for generating tables for the completed and not completed datagrids.
+        public void RefreshTables()
+        {
+
+            
 
 
             //Adds Complete button on Datagridview
@@ -126,16 +132,19 @@ namespace Data_Transfer_Handle
             if (this.OpenConnection() == true)
             {
                 mySqlDataAdapter = new MySqlDataAdapter("select EmployeeID,FirstName,LastName,PhoneNumber,OldComputer,NewComputer,VPN,RecievedDate from transferinformation WHERE FinishDate IS NULL;", conn);
-                DS = new DataSet();
-                mySqlDataAdapter.Fill(DS);
-                dgNotCompleted.DataSource = DS.Tables[0];
+
+                DSnotComplete = new DataSet();
+                DSnotComplete.Clear(); //Clear the Dataset before fill : Helps with refreshing the dataset
+                mySqlDataAdapter.Fill(DSnotComplete);
+                dgNotCompleted.DataSource = DSnotComplete.Tables[0];
 
 
 
                 mySqlDataAdapter = new MySqlDataAdapter("select EmployeeID,FirstName,LastName,PhoneNumber,OldComputer,NewComputer,VPN,RecievedDate,FinishDate from transferinformation WHERE FinishDate IS NOT NULL;", conn);
-                DS = new DataSet();
-                mySqlDataAdapter.Fill(DS);
-                dgCompleted.DataSource = DS.Tables[0];
+                DSComplete = new DataSet();
+                DSComplete.Clear();//Clear the Dataset before fill : Helps with refreshing the dataset
+                mySqlDataAdapter.Fill(DSComplete);
+                dgCompleted.DataSource = DSComplete.Tables[0];
 
 
 
@@ -154,24 +163,24 @@ namespace Data_Transfer_Handle
             //Initialize Access to the database
             DatabaseAccess tableInfo = new DatabaseAccess();
             //Get the tables needed to send to Excel
-            MySqlDataReader Reader= tableInfo.ExportToExcel();
+            MySqlDataReader Reader = tableInfo.ExportToExcel();
 
             //This Exports the tables to Excel.
-            int row=1;
+            int row = 1;
             string curFile = @"c:\cops\Archive.xlsx";
             if (!File.Exists(curFile))
             {
                 Object misValue = System.Reflection.Missing.Value;
                 Excel.Application app = new Excel.Application();
                 Excel.Workbook workbook = (Excel.Workbook)app.Workbooks.Add(misValue);
-                Excel.Worksheet worksheet=workbook.Sheets[1];
+                Excel.Worksheet worksheet = workbook.Sheets[1];
                 //Bolds Entire row
                 Excel.Range formatRange;
                 formatRange = worksheet.get_Range("a1");
                 formatRange.EntireRow.Font.Bold = true;
 
                 formatRange = worksheet.get_Range("A1", "M200");
-                
+
                 //Add Columns
                 worksheet.Cells[1, 1] = "EmployeeID";
                 worksheet.Cells[1, 2] = "First Name";
@@ -191,18 +200,20 @@ namespace Data_Transfer_Handle
                     row++;
                 }
                 DateTime date = DateTime.Now;
-                String DateSheetName=date.ToString("y", System.Globalization.CultureInfo.CreateSpecificCulture("en-US"));
+                String DateSheetName = date.ToString("y", System.Globalization.CultureInfo.CreateSpecificCulture("en-US"));
                 //Helps Auto Format Cells
                 formatRange.Columns.AutoFit();
 
                 worksheet.Name = DateSheetName;
                 workbook.SaveAs(@"C:\cops\Archive.xlsx");
                 workbook.Close();
-                
-               
-                
 
-            }else{
+
+
+
+            }
+            else
+            {
                 //Gets Exisiting Workbook for Modification
                 Excel.Application app = new Excel.Application();
                 Excel.Workbook workbook = app.Workbooks.Open(@"c:\cops\Archive.xlsx");
@@ -248,12 +259,9 @@ namespace Data_Transfer_Handle
                     //Helps Auto Format Cells
                     formatRange.Columns.AutoFit();
 
-
-
                     //Saves workwork
                     workbook.Save();
                     workbook.Close();
-                
 
                 }
                 catch (Exception E)
@@ -261,23 +269,9 @@ namespace Data_Transfer_Handle
                     MessageBox.Show("Archive Have already been done this Month");
                     workbook.Close();
                 }
-
-
-
-
-
-
-                
-               
             }
-            
-            
-
-          
-
-
 
         }
-     
+
     }
 }

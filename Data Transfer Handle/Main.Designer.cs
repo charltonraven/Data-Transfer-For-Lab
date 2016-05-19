@@ -113,7 +113,7 @@
             // 
             // btnArchive
             // 
-            this.btnArchive.Location = new System.Drawing.Point(768, 259);
+            this.btnArchive.Location = new System.Drawing.Point(852, 259);
             this.btnArchive.Name = "btnArchive";
             this.btnArchive.Size = new System.Drawing.Size(75, 23);
             this.btnArchive.TabIndex = 2;

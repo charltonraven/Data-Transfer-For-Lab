@@ -49,7 +49,7 @@
             this.tabControl.Location = new System.Drawing.Point(8, 4);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
-            this.tabControl.Size = new System.Drawing.Size(839, 253);
+            this.tabControl.Size = new System.Drawing.Size(919, 253);
             this.tabControl.TabIndex = 0;
             // 
             // tbNotComplete
@@ -58,7 +58,7 @@
             this.tbNotComplete.Location = new System.Drawing.Point(4, 22);
             this.tbNotComplete.Name = "tbNotComplete";
             this.tbNotComplete.Padding = new System.Windows.Forms.Padding(3);
-            this.tbNotComplete.Size = new System.Drawing.Size(831, 227);
+            this.tbNotComplete.Size = new System.Drawing.Size(911, 227);
             this.tbNotComplete.TabIndex = 0;
             this.tbNotComplete.Text = "Not Completed";
             this.tbNotComplete.UseVisualStyleBackColor = true;
@@ -72,7 +72,7 @@
             this.dgNotCompleted.Location = new System.Drawing.Point(0, 0);
             this.dgNotCompleted.Name = "dgNotCompleted";
             this.dgNotCompleted.ReadOnly = true;
-            this.dgNotCompleted.Size = new System.Drawing.Size(831, 227);
+            this.dgNotCompleted.Size = new System.Drawing.Size(905, 227);
             this.dgNotCompleted.TabIndex = 0;
             this.dgNotCompleted.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgNotCompleted_CellClick);
             this.dgNotCompleted.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgNotCompleted_CellContentClick);
@@ -84,7 +84,7 @@
             this.tbComplete.Location = new System.Drawing.Point(4, 22);
             this.tbComplete.Name = "tbComplete";
             this.tbComplete.Padding = new System.Windows.Forms.Padding(3);
-            this.tbComplete.Size = new System.Drawing.Size(831, 227);
+            this.tbComplete.Size = new System.Drawing.Size(911, 227);
             this.tbComplete.TabIndex = 1;
             this.tbComplete.Text = "Completed";
             this.tbComplete.UseVisualStyleBackColor = true;
@@ -98,7 +98,7 @@
             this.dgCompleted.Location = new System.Drawing.Point(2, 4);
             this.dgCompleted.Name = "dgCompleted";
             this.dgCompleted.ReadOnly = true;
-            this.dgCompleted.Size = new System.Drawing.Size(829, 223);
+            this.dgCompleted.Size = new System.Drawing.Size(903, 223);
             this.dgCompleted.TabIndex = 0;
             // 
             // btnRefresh
@@ -125,7 +125,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(854, 283);
+            this.ClientSize = new System.Drawing.Size(939, 283);
             this.Controls.Add(this.btnArchive);
             this.Controls.Add(this.btnRefresh);
             this.Controls.Add(this.tabControl);

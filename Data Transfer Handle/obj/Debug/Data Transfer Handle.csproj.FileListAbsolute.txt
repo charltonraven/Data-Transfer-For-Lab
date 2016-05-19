@@ -14,7 +14,6 @@ C:\Users\63530\documents\visual studio 2013\Projects\Data Transfer Handle\Data T
 C:\Users\63530\Documents\Visual Studio 2013\Projects\Data Transfer Handle\Data-Transfer-For-Lab\Data Transfer Handle\bin\Debug\Data Transfer Handle.exe.config
 C:\Users\63530\Documents\Visual Studio 2013\Projects\Data Transfer Handle\Data-Transfer-For-Lab\Data Transfer Handle\obj\Debug\Data Transfer Handle.exe
 C:\Users\63530\Documents\Visual Studio 2013\Projects\Data Transfer Handle\Data-Transfer-For-Lab\Data Transfer Handle\obj\Debug\Data Transfer Handle.pdb
-C:\Users\63530\Documents\Visual Studio 2013\Projects\Data Transfer Handle\Data-Transfer-For-Lab\Data Transfer Handle\obj\Debug\Data Transfer Handle.csprojResolveAssemblyReference.cache
 C:\Users\63530\Documents\Visual Studio 2013\Projects\Data Transfer Handle\Data-Transfer-For-Lab\Data Transfer Handle\obj\Debug\Data_Transfer_Handle.Main.resources
 C:\Users\63530\Documents\Visual Studio 2013\Projects\Data Transfer Handle\Data-Transfer-For-Lab\Data Transfer Handle\obj\Debug\Data_Transfer_Handle.Properties.Resources.resources
 C:\Users\63530\Documents\Visual Studio 2013\Projects\Data Transfer Handle\Data-Transfer-For-Lab\Data Transfer Handle\obj\Debug\Data Transfer Handle.csproj.GenerateResource.Cache
@@ -24,3 +23,4 @@ C:\Users\63530\Documents\Visual Studio 2013\Projects\Data Transfer Handle\Data-T
 C:\Users\63530\Documents\Visual Studio 2013\Projects\Data Transfer Handle\Data-Transfer-For-Lab\Data Transfer Handle\bin\Debug\Data Transfer Handle.pdb
 C:\Users\63530\Documents\Visual Studio 2013\Projects\Data Transfer Handle\Data-Transfer-For-Lab\Data Transfer Handle\obj\Debug\Data Transfer Handle.exe.manifest
 C:\Users\63530\Documents\Visual Studio 2013\Projects\Data Transfer Handle\Data-Transfer-For-Lab\Data Transfer Handle\obj\Debug\Data Transfer Handle.application
+C:\Users\63530\Documents\Visual Studio 2013\Projects\Data Transfer Handle\Data-Transfer-For-Lab\Data Transfer Handle\obj\Debug\Data Transfer Handle.csprojResolveAssemblyReference.cache

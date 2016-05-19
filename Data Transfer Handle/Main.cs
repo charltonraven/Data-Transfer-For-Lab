@@ -125,14 +125,14 @@ namespace Data_Transfer_Handle
             //Put the appropriate fields in play for the datagridview
             if (this.OpenConnection() == true)
             {
-                mySqlDataAdapter = new MySqlDataAdapter("select EmployeeID,FirstName,LastName,PhoneNumber,OldComputer,NewComputer,RecievedDate from transferinformation WHERE FinishDate IS NULL;", conn);
+                mySqlDataAdapter = new MySqlDataAdapter("select EmployeeID,FirstName,LastName,PhoneNumber,OldComputer,NewComputer,VPN,RecievedDate from transferinformation WHERE FinishDate IS NULL;", conn);
                 DS = new DataSet();
                 mySqlDataAdapter.Fill(DS);
                 dgNotCompleted.DataSource = DS.Tables[0];
 
 
 
-                mySqlDataAdapter = new MySqlDataAdapter("select EmployeeID,FirstName,LastName,PhoneNumber,OldComputer,NewComputer,RecievedDate,FinishDate from transferinformation WHERE FinishDate IS NOT NULL;", conn);
+                mySqlDataAdapter = new MySqlDataAdapter("select EmployeeID,FirstName,LastName,PhoneNumber,OldComputer,NewComputer,VPN,RecievedDate,FinishDate from transferinformation WHERE FinishDate IS NOT NULL;", conn);
                 DS = new DataSet();
                 mySqlDataAdapter.Fill(DS);
                 dgCompleted.DataSource = DS.Tables[0];
@@ -259,6 +259,7 @@ namespace Data_Transfer_Handle
                 catch (Exception E)
                 {
                     MessageBox.Show("Archive Have already been done this Month");
+                    workbook.Close();
                 }
 
 

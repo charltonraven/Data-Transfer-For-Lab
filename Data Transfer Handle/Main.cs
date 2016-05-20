@@ -21,8 +21,8 @@ namespace Data_Transfer_Handle
         MySqlDataAdapter mySqlDataAdapter;
         DataSet DSComplete;
         DataSet DSnotComplete;
-            
-       
+
+
 
 
 
@@ -31,7 +31,7 @@ namespace Data_Transfer_Handle
             InitializeComponent();
 
         }
-      
+
 
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -117,9 +117,6 @@ namespace Data_Transfer_Handle
         public void RefreshTables()
         {
 
-            
-
-
             //Adds Complete button on Datagridview
             DataGridViewButtonColumn btnDoneDT = new DataGridViewButtonColumn();
             dgNotCompleted.Columns.Add(btnDoneDT);
@@ -127,30 +124,43 @@ namespace Data_Transfer_Handle
             btnDoneDT.Text = "Done";
             // btnDoneDT.Name = "Complete";
             btnDoneDT.UseColumnTextForButtonValue = true;
+            //Test code for data Access way of getting datagrid views !
 
-            //Put the appropriate fields in play for the datagridview
-            if (this.OpenConnection() == true)
-            {
-                mySqlDataAdapter = new MySqlDataAdapter("select EmployeeID,FirstName,LastName,PhoneNumber,OldComputer,NewComputer,VPN,RecievedDate from transferinformation WHERE FinishDate IS NULL;", conn);
+            DatabaseAccess ForNotComplete = new DatabaseAccess();
+            dgNotCompleted.DataSource = ForNotComplete.notComplete(DSComplete).Tables[0];
 
-                DSnotComplete = new DataSet();
-                DSnotComplete.Clear(); //Clear the Dataset before fill : Helps with refreshing the dataset
-                mySqlDataAdapter.Fill(DSnotComplete);
-                dgNotCompleted.DataSource = DSnotComplete.Tables[0];
+
+            DatabaseAccess ForComplete = new DatabaseAccess();
+            dgCompleted.DataSource = ForComplete.Complete(DSComplete).Tables[0];
 
 
 
-                mySqlDataAdapter = new MySqlDataAdapter("select EmployeeID,FirstName,LastName,PhoneNumber,OldComputer,NewComputer,VPN,RecievedDate,FinishDate from transferinformation WHERE FinishDate IS NOT NULL;", conn);
-                DSComplete = new DataSet();
-                DSComplete.Clear();//Clear the Dataset before fill : Helps with refreshing the dataset
-                mySqlDataAdapter.Fill(DSComplete);
-                dgCompleted.DataSource = DSComplete.Tables[0];
 
 
 
-                //close connection
-                this.CloseConnection();
-            }
+            ////Put the appropriate fields in play for the datagridview
+            //if (this.OpenConnection() == true)
+            //{
+            //    mySqlDataAdapter = new MySqlDataAdapter("select EmployeeID,FirstName,LastName,PhoneNumber,OldComputer,NewComputer,VPN,RecievedDate from transferinformation WHERE FinishDate IS NULL;", conn);
+
+            //    DSnotComplete = new DataSet();
+            //    DSnotComplete.Clear(); //Clear the Dataset before fill 
+            //    mySqlDataAdapter.Fill(DSnotComplete);
+            //    dgNotCompleted.DataSource = DSnotComplete.Tables[0];
+
+
+
+            //    mySqlDataAdapter = new MySqlDataAdapter("select EmployeeID,FirstName,LastName,PhoneNumber,OldComputer,NewComputer,VPN,RecievedDate,FinishDate from transferinformation WHERE FinishDate IS NOT NULL;", conn);
+            //    DSComplete = new DataSet();
+            //    DSComplete.Clear();
+            //    mySqlDataAdapter.Fill(DSComplete);
+            //    dgCompleted.DataSource = DSComplete.Tables[0];
+
+
+
+            //    //close connection
+            //    this.CloseConnection();
+            //}
         }
 
         private void btnRefresh_Click(object sender, EventArgs e)
